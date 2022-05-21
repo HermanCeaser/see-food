@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:see_food/see_food_theme.dart';
-import 'package:see_food/widgets/home.dart';
+import 'home.dart';
 
 void main() {
   runApp(const SeeFood());

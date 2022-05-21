@@ -1,34 +1,39 @@
 import 'package:flutter/material.dart';
-import 'package:see_food/see_food_theme.dart';
-import 'package:see_food/widgets/cards/author_card.dart';
+
+import '../see_food_theme.dart';
+import '../models/models.dart';
+import 'author_card.dart';
 
 class Card2 extends StatelessWidget {
-  const Card2({Key? key}) : super(key: key);
+  final ExploreRecipe recipe;
 
-  final String category = 'Editor\'s Choice';
-  final String title = 'The Art of Dough';
-  final String description = 'Learn to make the perfect bread.';
+  const Card2({
+    Key? key,
+    required this.recipe,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        constraints: const BoxConstraints.expand(width: 380, height: 500),
-        decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('assets/images/mag5.png'),
-              fit: BoxFit.cover,
-            ),
-            borderRadius: BorderRadius.all(Radius.circular(10.0))),
+        constraints: const BoxConstraints.expand(
+          width: 350,
+          height: 450,
+        ),
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(recipe.backgroundImage),
+            fit: BoxFit.cover,
+          ),
+          borderRadius: const BorderRadius.all(Radius.circular(10.0)),
+        ),
         child: Column(
           children: [
-            // TODO 1: add author Information
-            const AuthorCard(
-              authorName: 'Herman Ceaser',
-              title: 'Smoothie Connoisseur',
-              imageProvider: AssetImage('assets/images/author_katz.jpeg'),
+            AuthorCard(
+              authorName: recipe.authorName,
+              title: recipe.role,
+              imageProvider: AssetImage(recipe.profileImage),
             ),
-            // TODO 4: Add Positioned Text
             Expanded(
               child: Stack(
                 children: [
@@ -36,7 +41,7 @@ class Card2 extends StatelessWidget {
                     bottom: 16,
                     right: 16,
                     child: Text(
-                      'Recipe',
+                      recipe.title,
                       style: SeeFoodTheme.lightTextTheme.headline1,
                     ),
                   ),
@@ -46,7 +51,7 @@ class Card2 extends StatelessWidget {
                     child: RotatedBox(
                       quarterTurns: 3,
                       child: Text(
-                        'Smoothies',
+                        recipe.subtitle,
                         style: SeeFoodTheme.lightTextTheme.headline1,
                       ),
                     ),
